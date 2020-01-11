@@ -240,7 +240,7 @@ def init_model(model_type='Q+I'):
     q_net = FCNet([num_hid, num_hid])
     v_net = FCNet([image_model.fc.dim, num_hid])
     a_net = FCNet([num_hid, num_hid])
-    classifier = FCNetDrop([num_hid, 256, 64, 10])
+    classifier = weight_norm(nn.Linear(num_hid, 10), dim=None)
 
     base_model = BaseModel(w_emb, q_emb, v_att, q_net, v_net, a_net, classifier, model_type)
     base_model = base_model.to(device)
