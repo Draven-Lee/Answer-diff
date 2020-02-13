@@ -13,6 +13,7 @@ def compute_accuracy(labels, outputs):
     score = score_sum/scores.size(0)
     return score.numpy()
 
+
 def focal_loss(labels, logits, alpha, gamma):
     """Compute the focal loss between `logits` and the ground truth `labels`.
     Focal loss = -alpha_t * (1-pt)^gamma * log(pt)
@@ -43,6 +44,7 @@ def focal_loss(labels, logits, alpha, gamma):
     focal_loss /= torch.sum(labels)
     return focal_loss
 
+
 class FocalLoss(nn.Module):
     def __init__(self, alpha=0.5, gamma=4, logits=True, reduce=True):
         super(FocalLoss, self).__init__()
@@ -70,8 +72,8 @@ class FocalLoss(nn.Module):
 
         return focal_loss
 
-class CBLoss(nn.Module):
 
+class CBLoss(nn.Module):
     def __init__(self, gamma=0.5, beta=0.9999, logits=True, reduce=True, eff_num=True):
         super(CBLoss, self).__init__()
         self.gamma = gamma
